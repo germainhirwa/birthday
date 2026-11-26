@@ -3,16 +3,16 @@
 <html lang="en">
 <head>
     <title>Happy Birthday Elle</title>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="description" content="Happy Birthday Elle">
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow">
     <meta name="keywords" content="Birthday, Happy">
-    <meta property="og:type" content="E-Greeting" />
+    <meta property="og:type" content="E-Greeting">
     <meta property="og:description" content="Wish you a very Happy Birthday">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -23,6 +23,85 @@
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+
+    <!-- Button visibility -->
+    <style>
+        .birthday-controls {
+            position: fixed;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            z-index: 10000;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .volume-section {
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .volume-section label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #volume {
+            width: 180px;
+            cursor: pointer;
+        }
+
+        .click-hint {
+            color: white;
+            font-family: 'Signika', sans-serif;
+            font-size: 17px;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        .birthday-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-family: 'Signika', sans-serif;
+            cursor: pointer;
+            background: #ff69b4;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .birthday-btn:hover {
+            background: #ff1493;
+            transform: scale(1.05);
+        }
+
+        .birthday-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Buttons are hidden until effect.js reveals them */
+        #wish_message,
+        #story {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .birthday-controls {
+                bottom: 10px;
+            }
+
+            .click-hint {
+                font-size: 14px;
+            }
+
+            .birthday-btn {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +110,7 @@
     <div class="loading"></div>
 
     <!-- Birthday music -->
-    <audio class="song" controls loop>
+    <audio class="song" loop>
         <source src="hbd.mp3" type="audio/mpeg">
         Your browser isn't invited for super fun audio time.
     </audio>
@@ -109,9 +188,7 @@
         <div class="row cake-cover">
             <div class="col-md-12 text-center">
                 <div class="cake">
-                    <img src="bd1.jpg"
-                         alt="Birthday Cake"
-                         class="cake-image">
+                    <img src="bd1.jpg" alt="Birthday Cake" class="cake-image">
                 </div>
             </div>
         </div>
@@ -180,52 +257,32 @@
     <!-- Interactive birthday controls -->
     <div class="birthday-controls">
 
-        <!-- Volume slider stays visible -->
         <div class="volume-section">
-
-            <label for="volume">
-                🔊 Turn up the volume for the full experience!
-            </label>
-
-            <input
-                type="range"
-                id="volume"
-                min="0"
-                max="100"
-                value="70"
-            >
-
+            <label for="volume">🔊 Turn up the volume for the full experience!</label>
+            <input type="range" id="volume" min="0" max="100" value="70">
         </div>
 
-        <!-- Instructions change as she progresses -->
         <p class="click-hint" id="click-hint">
             ✨ Your birthday surprise is waiting. Tap below! ✨
         </p>
 
-        <!-- Birthday buttons: one at a time -->
         <div class="button-group">
 
-            <button
-                type="button"
-                class="btn birthday-btn start-btn"
-                id="turn_on"
-                style="display:inline-block;">
+            <button type="button"
+                    class="btn birthday-btn"
+                    id="turn_on">
                 🎉 Start the Celebration
             </button>
 
-            <button
-                type="button"
-                class="btn birthday-btn wish-btn"
-                id="wish_message"
-                style="display:none;">
+            <button type="button"
+                    class="btn birthday-btn"
+                    id="wish_message">
                 🎂 Make a Birthday Wish
             </button>
 
-            <button
-                type="button"
-                class="btn birthday-btn story-btn"
-                id="story"
-                style="display:none;">
+            <button type="button"
+                    class="btn birthday-btn"
+                    id="story">
                 💌 Open Your Special Message
             </button>
 
@@ -235,76 +292,25 @@
 
     <!-- JavaScript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Original birthday animations -->
+    <!-- Original birthday animations and button sequence -->
     <script src="effect.js"></script>
 
-    <!-- Volume slider functionality -->
+    <!-- Volume slider -->
     <script>
         (function () {
-
             var slider = document.getElementById('volume');
             var song = document.querySelector('.song');
 
-            if (!slider || !song) {
-                return;
-            }
+            if (!slider || !song) return;
 
             song.volume = Number(slider.value) / 100;
 
             slider.addEventListener('input', function () {
                 song.volume = Number(this.value) / 100;
             });
-
         })();
-    </script>
-
-    <!-- Sequential birthday buttons -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-
-            var startButton = document.getElementById('turn_on');
-            var wishButton = document.getElementById('wish_message');
-            var storyButton = document.getElementById('story');
-            var hint = document.getElementById('click-hint');
-
-            // First button is visible initially
-            wishButton.style.display = 'none';
-            storyButton.style.display = 'none';
-
-            // First click: Start celebration
-            startButton.addEventListener('click', function () {
-
-                startButton.style.display = 'none';
-                wishButton.style.display = 'inline-block';
-
-                hint.textContent =
-                    '🎈 The celebration has started! Now make a birthday wish!';
-
-            });
-
-            // Second click: Birthday wish
-            wishButton.addEventListener('click', function () {
-
-                wishButton.style.display = 'none';
-                storyButton.style.display = 'inline-block';
-
-                hint.textContent =
-                    '💖 One last surprise is waiting just for you!';
-
-            });
-
-            // Third button: Special message
-            storyButton.addEventListener('click', function () {
-
-                hint.textContent =
-                    '🎂 Happy Birthday, Elle! Hope you loved your surprise!';
-
-            });
-
-        });
     </script>
 
 </body>
