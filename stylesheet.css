@@ -1038,3 +1038,8 @@ audio {
 .birthday-controls #story {
     display: inline-block;
 }
+
+/* Bring the final E closer to the other letters */
+#b5 {
+    left: 48% !important;
+}
