@@ -1043,3 +1043,28 @@ audio {
 #b5 {
     left: 48% !important;
 }
+
+/* Show only the first button initially */
+.birthday-btn {
+    display: none;
+}
+
+#turn_on {
+    display: inline-block;
+}
+
+/* Smooth appearance when the next button is revealed */
+.birthday-btn {
+    animation: buttonReveal 0.6s ease forwards;
+}
+
+@keyframes buttonReveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
