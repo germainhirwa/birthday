@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <!-- Custom stylesheets -->
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="loading.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="loading.css">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
@@ -180,7 +180,7 @@
     <!-- Interactive birthday controls -->
     <div class="birthday-controls">
 
-        <!-- Volume slider -->
+        <!-- Volume slider stays visible -->
         <div class="volume-section">
 
             <label for="volume">
@@ -197,32 +197,35 @@
 
         </div>
 
-        <!-- Click prompt -->
-        <p class="click-hint">
+        <!-- Instructions change as she progresses -->
+        <p class="click-hint" id="click-hint">
             ✨ Your birthday surprise is waiting. Tap below! ✨
         </p>
 
-        <!-- Birthday buttons -->
+        <!-- Birthday buttons: one at a time -->
         <div class="button-group">
 
             <button
                 type="button"
                 class="btn birthday-btn start-btn"
-                id="turn_on">
+                id="turn_on"
+                style="display:inline-block;">
                 🎉 Start the Celebration
             </button>
 
             <button
                 type="button"
                 class="btn birthday-btn wish-btn"
-                id="wish_message">
+                id="wish_message"
+                style="display:none;">
                 🎂 Make a Birthday Wish
             </button>
 
             <button
                 type="button"
                 class="btn birthday-btn story-btn"
-                id="story">
+                id="story"
+                style="display:none;">
                 💌 Open Your Special Message
             </button>
 
@@ -249,15 +252,59 @@
                 return;
             }
 
-            // Set initial volume to 70%
             song.volume = Number(slider.value) / 100;
 
-            // Update music volume as the slider moves
             slider.addEventListener('input', function () {
                 song.volume = Number(this.value) / 100;
             });
 
         })();
+    </script>
+
+    <!-- Sequential birthday buttons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var startButton = document.getElementById('turn_on');
+            var wishButton = document.getElementById('wish_message');
+            var storyButton = document.getElementById('story');
+            var hint = document.getElementById('click-hint');
+
+            // First button is visible initially
+            wishButton.style.display = 'none';
+            storyButton.style.display = 'none';
+
+            // First click: Start celebration
+            startButton.addEventListener('click', function () {
+
+                startButton.style.display = 'none';
+                wishButton.style.display = 'inline-block';
+
+                hint.textContent =
+                    '🎈 The celebration has started! Now make a birthday wish!';
+
+            });
+
+            // Second click: Birthday wish
+            wishButton.addEventListener('click', function () {
+
+                wishButton.style.display = 'none';
+                storyButton.style.display = 'inline-block';
+
+                hint.textContent =
+                    '💖 One last surprise is waiting just for you!';
+
+            });
+
+            // Third button: Special message
+            storyButton.addEventListener('click', function () {
+
+                hint.textContent =
+                    '🎂 Happy Birthday, Elle! Hope you loved your surprise!';
+
+            });
+
+        });
     </script>
 
 </body>
