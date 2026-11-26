@@ -13,79 +13,113 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Custom stylesheets -->
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" type="text/css" href="loading.css">
+
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
 </head>
 
 <body>
+
+    <!-- Loading screen -->
     <div class="loading"></div>
 
+    <!-- Birthday music -->
     <audio class="song" controls loop>
-        <source src="hbd.mp3">
+        <source src="hbd.mp3" type="audio/mpeg">
         Your browser isn't invited for super fun audio time.
     </audio>
 
+    <!-- Birthday balloons -->
     <div class="balloons text-center" id="b1">
         <h2 style="color:#F2B300;">E</h2>
     </div>
+
     <div class="balloons text-center" id="b2">
         <h2 style="color:#0719D4;">L</h2>
     </div>
+
     <div class="balloons text-center" id="b3">
         <h2 style="color:#D14D39;">L</h2>
     </div>
+
     <div class="balloons text-center" id="b5">
         <h2 style="color:#8377E4;">E</h2>
     </div>
+
     <div class="balloons text-center" id="b6">
         <h2 style="color:#99C96A;">♥</h2>
     </div>
+
     <div class="balloons text-center" id="b7">
         <h2 style="color:#20CFB4;">🎂</h2>
     </div>
 
-    <img src="Balloon-Border.png" width="100%" class="balloon-border">
+    <!-- Balloon border -->
+    <img src="Balloon-Border.png"
+         width="100%"
+         class="balloon-border"
+         alt="Balloon border">
 
     <div class="container">
+
+        <!-- Decorative lights -->
         <div class="row">
+
             <div class="col-md-2 col-xs-2 bulb-holder">
                 <div class="bulb" id="bulb_yellow"></div>
             </div>
+
             <div class="col-md-2 col-xs-2 bulb-holder">
                 <div class="bulb" id="bulb_red"></div>
             </div>
+
             <div class="col-md-2 col-xs-2 bulb-holder">
                 <div class="bulb" id="bulb_blue"></div>
             </div>
+
             <div class="col-md-2 col-xs-2 bulb-holder">
                 <div class="bulb" id="bulb_green"></div>
             </div>
+
             <div class="col-md-2 col-xs-2 bulb-holder">
                 <div class="bulb" id="bulb_pink"></div>
             </div>
+
             <div class="col-md-2 col-xs-2 bulb-holder">
                 <div class="bulb" id="bulb_orange"></div>
             </div>
+
         </div>
 
+        <!-- Happy Birthday banner -->
         <div class="row">
             <div class="col-md-12 text-center">
-                <img src="banner.png" class="bannar">
+                <img src="banner.png" class="bannar" alt="Happy Birthday banner">
             </div>
         </div>
 
+        <!-- Birthday cake -->
         <div class="row cake-cover">
             <div class="col-md-12 text-center">
                 <div class="cake">
-                    <img src="bd1.jpg" alt="Birthday Cake" class="cake-image">
+                    <img src="bd1.jpg"
+                         alt="Birthday Cake"
+                         class="cake-image">
                 </div>
             </div>
         </div>
 
+        <!-- Birthday message -->
         <div class="row message">
             <div class="col-md-12">
+
                 <p>Today is...</p>
                 <p>as beautiful as other days</p>
                 <p>but you realize</p>
@@ -137,23 +171,94 @@
                 <p>lastly...</p>
                 <p>I'd like to wish you one more time</p>
                 <p>a very happy birthday my dear Elle</p>
+
             </div>
         </div>
 
-        <div class="navbar navbar-fixed-bottom">
-            <div class="row">
-                <div class="col-md-6 text-center col-md-offset-3">
-                    <p style="color: white;">Raise Volume</p>
-                    <button class="btn btn-primary" id="turn_on">🎉 Start Celebration 🎉</button>
-                    <button class="btn btn-primary" id="wish_message">Click me Elle 🎂</button>
-                    <button class="btn btn-primary" id="story">💌 A Message For You</button>
-                </div>
-            </div>
-        </div>
     </div>
 
+    <!-- Interactive birthday controls -->
+    <div class="birthday-controls">
+
+        <!-- Volume slider -->
+        <div class="volume-section">
+
+            <label for="volume">
+                🔊 Turn up the volume for the full experience!
+            </label>
+
+            <input
+                type="range"
+                id="volume"
+                min="0"
+                max="100"
+                value="70"
+            >
+
+        </div>
+
+        <!-- Click prompt -->
+        <p class="click-hint">
+            ✨ Your birthday surprise is waiting. Tap below! ✨
+        </p>
+
+        <!-- Birthday buttons -->
+        <div class="button-group">
+
+            <button
+                type="button"
+                class="btn birthday-btn start-btn"
+                id="turn_on">
+                🎉 Start the Celebration
+            </button>
+
+            <button
+                type="button"
+                class="btn birthday-btn wish-btn"
+                id="wish_message">
+                🎂 Make a Birthday Wish
+            </button>
+
+            <button
+                type="button"
+                class="btn birthday-btn story-btn"
+                id="story">
+                💌 Open Your Special Message
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- JavaScript libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Original birthday animations -->
     <script src="effect.js"></script>
+
+    <!-- Volume slider functionality -->
+    <script>
+        (function () {
+
+            var slider = document.getElementById('volume');
+            var song = document.querySelector('.song');
+
+            if (!slider || !song) {
+                return;
+            }
+
+            // Set initial volume to 70%
+            song.volume = Number(slider.value) / 100;
+
+            // Update music volume as the slider moves
+            slider.addEventListener('input', function () {
+                song.volume = Number(this.value) / 100;
+            });
+
+        })();
+    </script>
+
 </body>
 </html>
