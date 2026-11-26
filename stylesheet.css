@@ -955,3 +955,86 @@ audio {
 		max-width: 300px;
 	}
 }
+
+/* --------------------------------------------------
+   Elle's birthday controls: raised, clear and clickable
+   -------------------------------------------------- */
+.birthday-controls {
+    position: fixed;
+    bottom: 38px;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 16px 18px 12px;
+    background: linear-gradient(to top, rgba(255, 218, 185, .98), rgba(255, 218, 185, .88), rgba(255, 218, 185, 0));
+}
+.volume-section {
+    margin: 0 auto 10px;
+    color: #633b65;
+    font: bold 15px 'Signika', sans-serif;
+}
+.volume-section label { display: block; margin-bottom: 5px; }
+#volume {
+    display: block;
+    width: 210px;
+    max-width: 75vw;
+    margin: 5px auto 0;
+    cursor: pointer;
+    accent-color: #8e44ad;
+}
+.click-hint {
+    color: #713c70;
+    font: bold 16px 'Signika', sans-serif;
+    margin: 7px 0 12px;
+    animation: birthdayHintPulse 1.8s ease-in-out infinite;
+}
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.birthday-btn {
+    border: 0;
+    border-radius: 28px;
+    padding: 13px 21px;
+    color: #fff;
+    font: bold 14px 'Signika', sans-serif;
+    box-shadow: 0 5px 13px rgba(0,0,0,.22);
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    cursor: pointer;
+    animation: birthdayButtonPulse 2.4s ease-in-out infinite;
+}
+.birthday-btn:hover, .birthday-btn:focus-visible {
+    color: #fff;
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 9px 20px rgba(0,0,0,.27);
+    filter: brightness(1.08);
+    outline: 3px solid rgba(255,255,255,.8);
+    outline-offset: 2px;
+}
+.birthday-btn:active { transform: scale(.96); }
+.start-btn { background: linear-gradient(135deg, #ff8a65, #e84393); }
+.wish-btn { background: linear-gradient(135deg, #9b59b6, #6c5ce7); }
+.story-btn { background: linear-gradient(135deg, #3498db, #2874a6); }
+@keyframes birthdayButtonPulse {
+    0%, 100% { box-shadow: 0 5px 13px rgba(0,0,0,.22); }
+    50% { box-shadow: 0 5px 19px rgba(142,68,173,.38); }
+}
+@keyframes birthdayHintPulse { 0%, 100% { opacity: 1; } 50% { opacity: .62; } }
+@media (max-width: 600px) {
+    .birthday-controls { bottom: 8px; padding: 10px 8px 8px; }
+    .volume-section { font-size: 13px; }
+    .click-hint { font-size: 13px; margin-bottom: 8px; }
+    .button-group { gap: 7px; }
+    .birthday-btn { padding: 10px 13px; font-size: 12px; }
+}
+/* Keep all three birthday controls visible from the beginning. */
+.birthday-controls #turn_on,
+.birthday-controls #wish_message,
+.birthday-controls #story {
+    display: inline-block;
+}
